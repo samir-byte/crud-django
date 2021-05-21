@@ -21,13 +21,13 @@
         <tbody>
             {% for emp in employee  %}
           <tr>
-            <th scope="row">{{emp.id}}</th>
+            <th scope="row">{{no}}</th>
             <td>{{emp.first_name}}</td>
             <td>{{emp.last_name}}</td>
             <td>{{emp.email}}</td>
             <td>
                 <a href="/employee_udpate/{{emp.id}}" class="btn btn-outline-info btn-sm">Update</a>
-                <a href="/employee_delete/{{emp.id}}" class="btn btn-outline-danger btn-sm">Delete</a>
+                <a href="/employee_delete/{{emp.id}}" class="btn btn-outline-danger btn-sm" onclick = "return confirm('Are you sure you want to delete this?')">Delete</a>
             </td>
           </tr>
           {% endfor %}

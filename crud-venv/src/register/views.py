@@ -6,7 +6,7 @@ from .models import Employee
 def index(request):
     employee = Employee.objects.all()
     context = {
-            'employee':employee
+            'employee':employee,
         }
     return render(request,'index.html',context)
 
