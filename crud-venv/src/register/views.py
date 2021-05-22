@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from .models import Employee
+from django.contrib import messages
 
 # Create your views here.
 def index(request):
@@ -19,7 +20,10 @@ def employe(request):
         print(first_name)
         emp = Employee(first_name=first_name,last_name=last_name,email=email)
         emp.save()
+        messages.success(request, 'Employee has been added')
         return redirect('/')
+
+    return render(request,'index.html',)
 
 def employeUpdate(request, id):
     # print(id)
@@ -31,14 +35,17 @@ def employeUpdate(request, id):
         emp.last_name = data['last']
         emp.email = data['email']
         emp.save()
+        messages.success(request, 'Employee has been updated')
         return redirect('/')
+    # return render(request,'index.html')
 
     context = {
-        'employee': emp
+        'employee': emp,
     }
     return render(request,'employee_update.html', context)
 
 def employeDelete(request,id):
     emp = Employee.objects.get(id=id)
     emp.delete()
+    messages.warning(request, 'Employee has been removed')
     return redirect('/')
